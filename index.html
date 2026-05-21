@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>World Digital Clock</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    table { border-collapse: collapse; margin: 2em auto; }
+    th, td { border: 1px solid #ccc; padding: 8px; }
+    th { background: #eee; }
+    td { font-family: monospace; }
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center;">World Clock</h2>
+  <table id="clock-table"></table>
+  <script>
+    const timeZones = [
+      ['New York (EST)', 'America/New_York'],
+      ['London (GMT)', 'Europe/London'],
+      ['Dubai (GST)', 'Asia/Dubai'],
+      ['Mumbai (IST)', 'Asia/Kolkata'],
+      ['Hong Kong (HKT)', 'Asia/Hong_Kong'],
+      ['Tokyo (JST)', 'Asia/Tokyo'],
+      ['Los Angeles (PST)', 'America/Los_Angeles'],
+    ];
+    function updateClocks() {
+      const table = document.getElementById('clock-table');
+      let s = '<tr><th>City</th><th>Time</th></tr>';
+      for (const [label, tz] of timeZones) {
+        const time = new Date().toLocaleTimeString('en-US', {timeZone: tz, hour12: false});
+        s += '<tr><td>' + label + '</td><td>' + time + '</td></tr>';
+      }
+      table.innerHTML = s;
+    }
+    setInterval(updateClocks, 1000);
+    updateClocks();
+  </script>
+</body>
+</html>
